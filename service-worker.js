@@ -7,18 +7,15 @@ self.addEventListener('install', event => {
         './script.js',
         './icon-192x192.png',
         './icon-512x512.png',
-        './offline.html',
       ]);
     })
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(response => {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request);
-    }).catch(() => {
-      return caches.match('./offline.html');
     })
   );
 });
